@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <%- include('../partials/head'); %>
+   <style>
+      body {
+         font-family: Arial;
+         margin: 0;
+         padding: 0;
+         background-color: #94b6da; 
+         min-height: 100vh;
+         display:grid ;
+        
+      }
+   
+      #formulario {
+         background-color: white;
+         border-radius: 10px;
+         padding: 40px;
+         width: 500px;
+         height:650px;
+         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+         justify-content: center;
+         align-items: center;
+      }
+   
+      h1 {
+         color: #143d8a;
+         font-size: 25px;
+         font-family: arial black;
+         font-weight: 700;
+         text-align: right;
+         text-align: left;
+         margin-bottom: 30px;
+      }
+   
+      .form-group,
+      .senha_do_estudante {
+         display: flex;
+         flex-direction: column;
+         margin-bottom: 20px;
+      }
+   
+      .form-row {
+   display: flex;
+   justify-content: space-between;
+   gap: 10px;
+}
+
+.form-row .form-group {
+   flex: 1;
+}
+
+
+      label {
+         font-weight: bold;
+         margin-bottom: 0px;
+         color: #143d8a;
+         font-size: 20px;
+      }
+   
+      input.form-control,
+      input[type="file"],
+      input[type="email"],
+      input[type="password"],
+      select {
+         border: 3px solid #1d4ca3;
+         border-radius: 30px;
+         padding: 10px 15px;
+         font-size: 16px;
+         outline: none;
+      }
+   
+      select {
+         height: 45px;
+         font-weight: bold;
+      }
+   
+      input[type="file"] {
+         padding: 4px;
+      }
+      .btn.btn-primary {
+  background-color: #143d8a; 
+}
+   
+      button {
+         width: 100%;
+         background-color: #143d8a;
+         color: white;
+         font-weight: bold;
+         font-size: 20px;
+         padding: 12px;
+         border: none;
+         border-radius: 25px;
+         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+         transition: all 0.3s ease-in-out;
+      }
+   
+      button:hover {
+         background-color: #00398c;
+         transform: scale(1.05);
+      }
+   
+      @media screen and (max-width: 600px) {
+         #formulario {
+            width: 90%;
+            padding: 20px;
+         }
+   
+         h1 {
+            font-size: 22px;
+            text-align: center;
+         }
+      }
+      #idade_E{
+         width: 190px;
+      }
+      .turma_E{
+         width: 190px;
+         height: 40px;
+      }
+   </style>
+   
+</head>
+
+<body>
+   <header id="menu" style="position: relative;"><%- include('../partials/menu'); %></header>
+
+   
+   <div class="container" id="formulario">
+      <h1>Olá estudante, realize seu cadastro</h1>
+      <form action="/estudante/cadastro/back_end" method="POST" enctype="multipart/form-data">
+         <div class="form-group">
+            <label for="nome_estudante">Nome completo</label>
+            <input type="text" class="form-control" id="nome_E" name="nome_E" required>
+         </div>
+         <div class="form-row">
+         <div class="form-group">
+            <label for="nome_estudante">Idade</label>
+            <input type="number" class="form-control" id="idade_E" name="idade_E" required>
+         </div>
+         <div class="form-group">
+            <label for="turma_estudante">Sua turma</label>
+           <select id ="turma_estudante" name="turma_E" class="turma_E" required>
+               <option class="1t_turma_E" name="1t_turma_E">1T</option>
+               <option class="1m_turma_E" name="1m_turma_E">1M</option>
+               <option class="2t_turma_E" name="2t_turma_E">2T</option>
+               <option class="2m_turma_E" name="2m_turma_E">2M</option>
+               <option class="3t_turma_E" name="3t_turma_E">3T</option>
+               <option class="3m_turma_E" name="3m_turma_E">3M</option>
+               <option class="4t_turma_E" name="4t_turma_E">4T</option>
+               <option class="4m_turma_E" name="4m_turma_E">4M</option>
+           </select>
+         </div>
+      </div>
+         <div class="form-group">
+            <label for="imagem_do_estudante">Carregue uma foto atual</label>
+            <input type="file" class="form-control" id="foto_E" name="foto_E" required>
+         </div>
+         <div class="form-group">
+            <label for="email_do_estudante">Informe-nos o seu melhor email</label>
+            <input type="email" class="form-control" id="email_E" name="email_E" required>
+         </div>
+         <div class="senha_do_estudante">
+            <label for="pwd">Crie uma senha</label>
+            <input type="password" class="senha_E" id="senha_E" name="senha_E" required>
+         </div>
+         <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+   </div>
+   
+ 
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<title>ComuniQ: IFSul Gravataí</title>
+<%- include('partials/head'); %>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {
+background-color: #7ea9d9;
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+ }
+</style>
+</head>
+<body class="flex flex-col items-center">
+
+<img src="/imagens/logo.png"
+alt="Logo"
+class="w-48 md:w-60 lg:w-72 mt-10 mb-8" />
+<!-- TÍTULO -->
+<h1 class="text-white font-bold text-4xl md:text-5xl lg:text-6xl text-center
+mb-6">
+ Olá usuário! <br>
+ Bem-vindo ao <br>
+<strong>ComuniQ: IFSul Gravataí!</strong>
+</h1>
+<div class="flex flex-col md:flex-row gap-6 mb-10">
+<a href="/estudante/home_page">
+<button class="bg-blue-900 text-white text-2xl font-bold px-10 py-5
+rounded-full w-64 hover:bg-blue-800">
+ Estudante
+</button>
+</a>
+<a href="/adm/home_page">
+<button class="bg-blue-900 text-white text-2xl font-bold px-10 py-5
+rounded-full w-64 hover:bg-blue-800">
+ Coordenador
+</button>
+</a>
+</div>
+<!-- SEÇÃO SOBRE -->
+<div class="bg-blue-900 text-white w-11/12 md:w-2/3 lg:w-1/2 p-6 rounded-lg
+shadow-lg mb-10">
+<h2 class="text-3xl font-black text-center mb-4">Sobre a Plataforma</h2>
+<p class="text-lg text-justify">
+ O ComuniQ IFSul Gravataí é uma aplicação para simplificar a comunicação
+ entre a gestão da escola e seus estudantes, fazendo com que todos
+ se sintam mais acolhidos e pertencentes ao ambiente escolar.
+</p>
+</div>
+</body>
+</html>

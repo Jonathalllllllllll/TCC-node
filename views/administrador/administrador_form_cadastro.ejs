@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <%- include('../partials/head'); %>
+   <style>
+      body {
+         font-family: 'Poppins', sans-serif;
+         margin: 0;
+         padding: 0;
+         background-color: #94b6da; 
+         min-height: 100vh;
+         display: grid;
+      }
+         .form-row {
+   display: flex;
+   justify-content: space-between;
+   gap: 10px;
+}
+.form-row .form-group {
+  width: 48%; 
+}
+      
+
+      #formulario {
+         background-color: white;
+         border-radius: 10px;
+         padding: 40px;
+         height: 650px;
+         width: 500px;
+         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+         display: flex;
+         font-size:20px;
+         color: #143d8a;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+      }
+
+      h1 {
+         color: #143d8a;
+         font-size: 28px;
+         font-weight: 700;
+         text-align: center;
+         margin-bottom: 30px;
+      }
+
+      .form-group,
+      .senha_do_adm {
+         display: flex;
+         flex-direction: column;
+         margin-bottom: 20px;
+         width: 100%;
+      }
+
+      label {
+         font-weight: bold;
+         margin-bottom: 5px;
+
+      }
+
+      input.form-control,
+      input[type="file"],
+      input[type="email"],
+      input[type="password"],
+      select {
+         border: 3px solid #143d8a;
+         border-radius: 30px;
+         padding: 10px 15px;
+         font-size: 16px;
+         outline: none;
+      }
+
+      select {
+         height: 45px;
+         font-weight: bold;
+      }
+
+      input[type="file"] {
+         padding: 6px;
+      }
+
+      button {
+         width: 100%;
+         background-color: #143d8a;
+         color: white;
+         font-weight: bold;
+         font-size: 20px;
+         padding: 12px;
+         border: none;
+         border-radius: 25px;
+         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+         transition: all 0.3s ease-in-out;
+      }
+
+      #eixo_adm{
+         width:200px;
+      }
+      #coordenadoria_adm{
+         width:200px;
+      }
+      button:hover {
+         background-color: #143d8a;
+         transform: scale(1.05);
+      }
+
+      @media screen and (max-width: 600px) {
+         #formulario {
+            width: 90%;
+            padding: 20px;
+         }
+
+         h1 {
+            font-size: 22px;
+         }
+      }
+   </style>
+</head>
+
+<body>
+   <header><%- include('../partials/menu_adm'); %></header>
+
+   <div class="container" id="formulario">
+      <h1>Olá administrador, insira seus dados para criar o cadastro.</h1>
+      <form action="/adm/cadastro/back_end" method="POST" enctype="multipart/form-data">
+         <div class="form-group">
+            <label for="nome_adm">Nome completo</label>
+            <input type="text" class="form-control" id="nome_adm" name="nome_adm" required>
+         </div>
+
+<div class="form-row">
+   <div class="form-group">
+      <label for="eixo_adm">Escolha o eixo</label>
+      <select id="eixo_adm" name="eixo_adm" class="form-control" required>
+         <option value="1">Social</option>
+         <option value="2">Infraestrutura</option>
+         <option value="3">Pedagógico</option>
+      </select>
+   </div>
+
+   <div class="form-group">
+      <label for="coordenadoria_adm">Coordenadoria</label>
+      <select id="coordenadoria_adm" name="coordenadoria_adm" class="form-control" required>
+         <option value="COAE">COAE</option>
+         <option value="CORAC">CORAC</option>
+         <option value="DEPEX">DEPEX</option>
+         <option value="COAP">COAP</option>
+         <option value="PSICO-PEDAGOGICO">PSICO-PEDAGÓGICO</option>
+         <option value="DIRECAO_GERAL">DIREÇÃO GERAL</option>
+      </select>
+   </div>
+</div>
+
+       
+
+         <div class="form-group">
+            <label for="foto_adm">Carregue uma foto atual</label>
+            <input type="file" class="form-control" id="foto_adm" name="foto_adm" required>
+         </div>
+
+         <div class="form-group">
+            <label for="email_adm">Email</label>
+            <input type="email" class="form-control" id="email_adm" name="email_adm" required>
+         </div>
+
+         <div class="senha_do_adm">
+            <label for="senha_adm">Crie uma senha</label>
+            <input type="password" class="form-control" id="senha_adm" name="senha_adm" required>
+         </div>
+
+         <button type="submit">Enviar</button>
+      </form>
+   </div>
+
+   
+</body>
+
+</html>

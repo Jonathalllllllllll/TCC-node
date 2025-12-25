@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <%- include('../partials/head'); %>
+  <title>Formulário de Demandas</title>
+  <style>
+    body {
+      font-family: arial;
+      margin: 0;
+      background: #94b6da;
+      color: #333;
+    }
+    #foto_comentario_E{
+      font-size: 20px;
+    }
+    h1, h2, h3 {
+      margin: 10px 0;
+      font-weight: 600;
+      font-family: arial black;
+    }
+
+    p, label {
+      margin: 5px 0;
+    }
+
+    .retangulo_azul {
+      position: relative;
+      top: 20px;
+      left: 30%;
+      width: 40%;
+      height: 20%;
+      background: #014aa3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    #titulo1 {
+      color: white;
+      font-family: impact;
+      font-size: 50px;
+      margin: 1;
+    }
+
+    #titulo2 {
+      color: #e9eef6;
+      font-size: 20px;
+      margin-top: 8px;
+    }
+
+    .form_baixo {
+      position: relative;
+      top: 20px;
+      font-size: 23px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    form {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    button {
+      margin: 6px;
+      padding: 5px 15px;
+      background: #014aa3 ;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #014aa3 ;
+      transform: translateY(-2px);
+    }
+
+    button.selected {
+      background: rebeccapurple !important;
+      transform: scale(1.05);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 5px;
+      margin: 2px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+      font-size: 15px;
+      transition: border 0.3s;
+    }
+
+    textarea:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .axis-section, .spec-section {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      background: #fafafa;
+      border-radius: 10px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .suggestion {
+      margin-bottom: 5px;
+      text-align: left;
+      font-size: 20px !important;
+    }
+
+    input[type="file"] {
+      display: block;
+      margin: 20px auto;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+
+    .btn-submit {
+      margin-top: 20px;
+      background: #28a745;
+    }
+
+    .btn-submit:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+
+<body>
+  <header id="menu"><%- include('../partials/menu'); %></header>
+
+  <div class="retangulo_azul">
+    <h1 id="titulo1">Formulário de Demandas</h1>
+    <p id="titulo2">Escolha um eixo para comentar</p>
+  </div>
+
+  <div class="form_baixo">
+    <form id="formulario_comentario" action="/estudante/comentario/back_end" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="data_comentario_E" id="data_comentario_E">
+      <input type="hidden" name="comentario_E" id="comentario_E">
+      <input type="hidden" name="categoria_comentario_E" id="categoria_comentario_E">
+
+      <div style="text-align:center; margin-bottom: 20px;" id="axis-buttons">
+        <button type="button" onclick="showAxis('social', this)">Eixo Social</button>
+        <button type="button" onclick="showAxis('infraestrutura', this)">Eixo Infraestrutura</button>
+        <button type="button" onclick="showAxis('pedagogico', this)">Eixo Pedagógico</button>
+      </div>
+
+      <div id="social" class="axis-section">
+        <p>Escolha uma especificação:</p>
+        <button type="button" onclick="showSpec('social', 'colegas', this)">Colegas</button>
+        <button type="button" onclick="showSpec('social', 'professores', this)">Professores</button>
+        <button type="button" onclick="showSpec('social', 'servidores', this)">Servidores</button>
+
+        <div id="social-colegas" class="spec-section">
+          <h3>Comentário sobre Colegas</h3>
+          <div class="suggestion">
+            <textarea name="comentario_social_colegas" placeholder="Escreva seu comentário..."></textarea>
+          </div>
+        </div>
+
+        <div id="social-professores" class="spec-section">
+          <h3>Comentário sobre Professores</h3>
+          <div class="suggestion">
+            <textarea name="comentario_social_professores" placeholder="Escreva seu comentário..."></textarea>
+          </div>
+        </div>
+
+        <div id="social-servidores" class="spec-section">
+          <h3>Comentário sobre Servidores</h3>
+          <div class="suggestion">
+            <textarea name="comentario_social_servidores" placeholder="Escreva seu comentário..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="infraestrutura" class="axis-section">
+        <p>Escolha uma especificação:</p>
+        <button type="button" onclick="showSpec('infraestrutura', 'lazer', this)">Espaços de Lazer</button>
+        <button type="button" onclick="showSpec('infraestrutura', 'aprendizagem', this)">Espaços de Aprendizagem</button>
+
+        <div id="infraestrutura-lazer" class="spec-section">
+          <h3>Comentário sobre Espaços de Lazer</h3>
+          <div class="suggestion">
+            <textarea name="comentario_infra_lazer" placeholder="Escreva seu comentário..."></textarea>
+          </div>
+        </div>
+
+        <div id="infraestrutura-aprendizagem" class="spec-section">
+          <h3>Comentário sobre Espaços de Aprendizagem</h3>
+          <div class="suggestion">
+            <textarea name="comentario_infra_aprendizagem" placeholder="Escreva seu comentário..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="pedagogico" class="axis-section">
+        <p>Escolha uma especificação:</p>
+        <button type="button" onclick="showSpec('pedagogico', 'notas', this)">Notas</button>
+        <button type="button" onclick="showSpec('pedagogico', 'didatica', this)">Didática</button>
+        <button type="button" onclick="showSpec('pedagogico', 'atendimento', this)">Atendimento</button>
+
+        <div id="pedagogico-notas" class="spec-section">
+          <h3>Comentário sobre Notas</h3>
+          <textarea name="comentario_pedagogico_notas" placeholder="Escreva seu comentário..."></textarea>
+        </div>
+
+        <div id="pedagogico-didatica" class="spec-section">
+          <h3>Comentário sobre Didática</h3>
+          <textarea name="comentario_pedagogico_didatica" placeholder="Escreva seu comentário..."></textarea>
+        </div>
+
+        <div id="pedagogico-atendimento" class="spec-section">
+          <h3>Comentário sobre Atendimento</h3>
+          <textarea name="comentario_pedagogico_atendimento" placeholder="Escreva seu comentário..."></textarea>
+        </div>
+      </div>
+
+      <input type="file" name="foto_comentario_E" id="foto_comentario_E">
+
+      <div style="text-align:center;">
+        <button type="submit" class="btn-submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hoje = new Date();
+      const dataHoraFormatada = hoje.toISOString().slice(0, 19).replace("T", " ");
+      document.getElementById('data_comentario_E').value = dataHoraFormatada;
+
+      document.getElementById('formulario_comentario').addEventListener('submit', function (e) {
+        const textareas = document.querySelectorAll('.spec-section');
+        let comentario = '';
+        textareas.forEach(section => {
+          if (section.style.display === 'block') {
+            const textarea = section.querySelector('textarea');
+            if (textarea && textarea.value.trim() !== '') {
+              comentario = textarea.value.trim();
+            }
+          }
+        });
+        document.getElementById('comentario_E').value = comentario;
+        if (comentario === '') {
+          e.preventDefault();
+          alert('Por favor, preencha um comentário antes de enviar.');
+        }
+      });
+    });
+
+    function showAxis(axisId, btn) {
+      document.querySelectorAll('.axis-section').forEach(section => section.style.display = 'none');
+      document.querySelectorAll('#axis-buttons button').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      const selectedAxis = document.getElementById(axisId);
+      if (selectedAxis) {
+        selectedAxis.style.display = 'block';
+        selectedAxis.querySelectorAll('.spec-section').forEach(spec => spec.style.display = 'none');
+        document.getElementById('categoria_comentario_E').value = axisId;
+      }
+    }
+
+    function showSpec(axisId, specId, btn) {
+      const axis = document.getElementById(axisId);
+      if (!axis) return;
+
+      axis.querySelectorAll('.spec-section').forEach(spec => spec.style.display = 'none');
+      axis.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      const selectedSpec = document.getElementById(`${axisId}-${specId}`);
+      if (selectedSpec) {
+        selectedSpec.style.display = 'block';
+        let comentario = selectedSpec.querySelector('textarea')?.value || '';
+        document.getElementById('comentario_E').value = comentario;
+      }
+    }
+  </script>
+</body>
+</html>

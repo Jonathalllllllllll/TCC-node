@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <%- include('../partials/head'); %>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #94b6da;
+    }
+
+    .body1 {
+      width: 70%;
+      margin: 0 auto;
+      align-items: center;
+      height: 80vh;
+      display: grid;
+    }
+
+    #titulo1 {
+      color: white;
+      font-family: impact;
+      font-size: 50px;
+      margin: 0;
+    }
+
+    .retangulo_azul {
+      position: relative;
+      top: 20px;
+      text-align: center;
+      left: 20%;
+      width: 600px;
+      height: 120px;
+      background: #143d8a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .mensagem .foto_comentario_E {
+      width: 400px !important;
+      height: 180px !important;
+      object-fit: cover;
+      margin-top: 10px;
+      border-radius: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .mensagem {
+      display: flex;
+      align-items: flex-start;
+      margin: 0px 0;
+    }
+
+    .texto-estudante{
+      font-size:22px !important;
+    }
+
+    .texto-coordenador{
+      font-size:22px !important;
+    }
+    
+    .mensagem img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+
+    .mensagem.estudante {
+      flex-direction: row;
+      width: 700px;
+      right: 10%;
+      position: relative;
+    }
+
+    .mensagem.coordenador {
+      left: 55%;
+      position: relative;
+      flex-direction: row-reverse;
+      text-align: left;
+      width: 500px;
+    }
+
+    .mensagem .texto {
+      display: inline-block;
+      width: fit-content;
+      max-width: 400px;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #143d8a;
+      color: white;
+      font-size: 20px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .mensagem.coordenador .texto {
+      background-color: white;
+      color: #143d8a;
+    }
+
+    #t11 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      width: 1150px;
+      height: 70px;
+      left: 10%;
+      text-align: center;
+      color: #143d8a;
+      font-family: Arial Black;
+      position: relative;
+      margin-top: 3%;
+      margin-left: calc(-50vw + 50%);
+      font-size: 25px;
+      justify-content: center;
+    }
+
+    textarea {
+      width: 100%;
+      max-width: 500px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+    
+    button.submit-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #143d8a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    button.submit-btn:hover {
+      background-color: #143d8a;
+    }
+
+    hr {
+      width: 100%;
+      max-width: 1000px;
+      border: 1px solid #ccc;
+      margin: 30px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header><%- include('../partials/menu_adm'); %></header>
+
+  <div class="body1">
+
+    <div class="retangulo_azul">
+      <h1 id="titulo1">Fórum de conversa com estudante</h1>
+    </div>
+
+    <div id="t11">
+      <% if (comentario.resposta_adm) { %>
+        <h2>Estudante <%= comentario.nome_E %> ( turma <%= comentario.turma_E %> )</h2>
+      <% } else { %>
+        <h2>Aguardando sua resposta</h2>
+      <% } %>
+    </div>
+
+    <br><br>
+
+    <div class="mensagem estudante">
+      <img src="/imagens/estudante/estudante_cadastro/<%= comentario.foto_E %>" alt="Foto do Estudante">
+      <div class="texto">
+        <p class="texto-estudante"><strong><%= comentario.nome_E %>:</strong> <%= comentario.comentario_E || 'Sem descrição' %></p>
+        <span><%= new Date(comentario.data_comentario_E).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) %></span>
+      </div>
+      <% if (comentario.foto_comentario_E) { %>
+        <img class="foto_comentario_E" src="/imagens/estudante/estudante_comentario/<%= comentario.foto_comentario_E %>" alt="Foto_do_comentario_Estudante">
+      <% } %>
+    </div>
+
+    <br><br>
+
+    <% if (comentario.resposta_adm) { %>
+      <div class="mensagem coordenador">
+        <img src="/imagens/administrador/adm_cadastro/<%= comentario.foto_adm %>" alt="Foto do Administrador">
+        <div class="texto">
+          <p class="texto-coordenador"><strong><%= comentario.nome_adm %>: </strong> <%= comentario.resposta_adm %></p>
+          <span><%= new Date(comentario.data_resposta_adm).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) %></span>
+        </div>
+      </div>
+    <% } else { %>
+      <form method="POST" action="/adm/forum/back_end" enctype="multipart/form-data">
+        <input type="hidden" name="id_comentario_E" value="<%= comentario.id_comentario_E %>">
+        <textarea name="resposta_adm" rows="5" placeholder="Digite sua resposta..."></textarea>
+        <button type="submit" class="submit-btn">Enviar resposta</button>
+      </form>
+    <% } %>
+
+    <hr>
+
+  </div>
+</body>
+</html>

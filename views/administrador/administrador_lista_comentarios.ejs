@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <%- include('../partials/head'); %>
+  <style>
+    body {
+      background-color: #94b6da;
+      font-family: Arial;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .comentario-box {
+      width: 1000px;
+      max-width: 100%;
+      color: white;
+      border-radius: 5px;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    #comentario-texto {
+      width: 500px;
+      text-align: center;
+      background-color: #143d8a;
+      height: 100px;
+      font-weight: bold;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comentario-data {
+      text-align: right;
+      min-width: 120px;
+    }
+
+    .comentario-data p {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .comentario-data span {
+      background-color: white;
+      color: #143d8a;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+
+
+    .comentario-exclusao a {
+    display: inline-block;
+    background-color: #143d8a; 
+    color: white;
+    font-weight: bold;
+    padding: 8px 18px;
+    border-radius: 8px; 
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .comentario-exclusao a:hover {
+    background-color: #0f2e6a; 
+  }
+
+  .comentario-exclusao p {
+    margin: 0;
+    font-size: 16px;
+  }
+    .comentario-btn {
+      margin: 0 20px;
+    }
+
+    .comentario-btn a {
+      background-color: white;
+      color: #143d8a;
+      font-weight: bold;
+      padding: 5px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .comentario-btn a:hover {
+      background-color: #e6e6e6;
+      color: #143d8a;
+    }
+
+    #t11 {
+      background-color: white;
+      color: #143d8a;
+      font-size: 25px;
+      height: 70px;
+      width: 100%;
+      font-family: Arial Black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comentario-status {
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .comentario-status p {
+      margin: 0;
+      font-size: 22px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .comentario-status span {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center;
+      font-weight: bold;
+      color: white;
+    }
+
+    .comentario-status span.resolvido {
+      background-color: #28a745;
+    }
+
+    .comentario-status span.pendente {
+      background-color: #dc3545;
+    }
+    #fulano{
+      position: relative;
+      left:15px;
+    }
+    #titulo1 {
+      color: white;
+      font-family: impact;
+      font-size: 55px;
+      margin: 0;
+    }
+
+    .retangulo_azul {
+      position: relative;
+      top: 20px;
+      left: 30%;
+      width: 40%;
+      height: 70px;
+      background: #143d8a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <header><%- include('../partials/menu_adm'); %></header>
+
+  <div class="retangulo_azul">
+    <h1 id="titulo1">Lista de comentários</h1>
+  </div>
+
+  <div class="container mt-5">
+    <% let totalcomentarios = dadosrecebidos.length; %>
+    <h2 id="t11"><%= totalcomentarios %> comentário<%= totalcomentarios !==1 ? 's' : '' %> foram enviados para o seu eixo <%= dadosrecebidos.descricao_subeixo %> </h2>
+
+    <% if (totalcomentarios !== 0) { %>
+      <% dadosrecebidos.forEach(function(item) { %>
+        <div class="comentario-box">
+          <div class="comentario-texto d-flex align-items-center justify-content-between" id="comentario-texto">
+            <div id="fulano">
+              <%= item.nome_E %> enviou um comentário
+            </div>
+            <div class="comentario-btn">
+              <a href="/adm/forum/front_end/<%= item.id_comentario_E %>">Acessar</a>
+            </div>
+          </div>
+
+          <div class="comentario-status">
+            <p>Status</p>
+            <span class="<%= item.status_comentario_E.toLowerCase() === 'resolvido' ? 'resolvido' : 'pendente' %>">
+              <%= item.status_comentario_E %>
+            </span>
+          </div>
+
+          <div class="comentario-data">
+            <p>Data</p>
+            <span>
+              <%= new Date(item.data_comentario_E).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) %>
+            </span>
+          </div>
+          <div class="comentario-exclusao">
+            <a href="/adm/exclusao_comentario/<%= item.id_comentario_E %>"><p>Excluir</p></a>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="text-center">Nenhum comentário registrado.</p>
+    <% } %>
+  </div>
+</body>
+</html>

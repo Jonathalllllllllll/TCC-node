@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <%- include('../partials/head'); %>
+
+    <title>Estudante_Home</title>
+
+    <style> 
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #94b6da;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+.body3{
+    display: flex; justify-content: center; align-items: center;
+    
+}
+#titulo{
+    font-family: impact;
+    font-size: 70px;
+}
+        header {
+            width: 100%;
+        }
+
+        .menu-topo {
+            margin-top: 20px;
+            font-family: Arial Black;
+        }
+
+        .menu-topo button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #143d8a;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .menu-topo button:hover {
+            background-color: #143d8a;
+        }
+
+        main {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        main h2 {
+            font-size: 32px;
+            color: #143d8a;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-btn {
+            padding: 15px 40px;
+            background-color: #143d8a;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 30px;
+        }
+
+        .form-btn:hover {
+            background-color: #143d8a;
+        }
+        #main1{
+            position: relative; 
+
+            margin-top: 180px;
+        }
+    </style>
+</head>
+
+<body>
+    <header><%- include('../partials/menu'); %></header>
+
+
+    <div class="menu-topo">
+        <button onclick="location.href='/estudante/login/frontend'">Login</button>
+        <button onclick="location.href='/estudante/logout'">Log out</button>
+        <button onclick="location.href='/estudante/cadastro/front_end'">Fazer cadastro</button>
+    </div>
+    <div class="body3">
+
+    <main id="main1">
+        <h2 id="titulo">Olá estudante!<br>Seja bem-vindo ao site.</h2>
+        <button class="form-btn" onclick="location.href='/estudante/comentario/front_end'">Realizar formulário</button>
+    </main>
+
+    </div>
+
+
+</body>
+
+</html>
