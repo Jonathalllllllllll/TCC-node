@@ -63,6 +63,34 @@ npm run start:dev
 
 | GET | /estudante/login/frontend | Login do estudante|
 
+| GET | /adm/cadastro/front_end | Cadastro do coordenador|
+
+| GET | /adm/login/front_end | Login do coordenador|
+
+| GET | /estudante/comentario/front_end | Inserção de comentário do estudante para a escola
+
+| GET | /estudante/lista_de_comentarios | Visualização do aluno a sua página de comentários
+
+| GET | /adm/lista_comen_e_resposta' | Visualização do coordenador aos comentários dos alunos referentes ao seu eixo
+
+| GET | /estudante/forum/front_end/:id_comentario_E | Fórum do aluno com o coordenador
+
+| GET | /adm/forum/front_end/:id_comentario_E | Fórum do coordenador com o aluno
+
+| GET | /adm/exclusao_comentario/:id_comentario_E | Exclusão do comentáro do estudante pelo coordenador
 
 
-| POST | /login | Autentica o usu
+
+| POST | /estudante/login/backend | Autentica o usuario estudante
+
+| POST | /estudante/comentario/back_end | Validação do comentário do aluno e inserção no banco de dados
+
+| POST | /estudante/forum/back_end | Validação do comentário do aluno
+
+| POST | /adm/forum/back_end | validação da resposta do coordenador
+
+
+
+
+
+
